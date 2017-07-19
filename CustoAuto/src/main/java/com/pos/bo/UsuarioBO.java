@@ -7,6 +7,9 @@ package com.pos.bo;
 
 import com.pos.dao.UsuarioDAO;
 import com.pos.entity.Usuario;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -14,14 +17,26 @@ import com.pos.entity.Usuario;
  */
 public class UsuarioBO {
     
-    protected UsuarioDAO userDAO ;
-    public Usuario isUser(Usuario user) throws Exception{
+    protected UsuarioDAO userDAO;
+    
+    public Usuario isUser(Usuario user) throws Exception {
         userDAO = new UsuarioDAO();
-       Usuario usuario =  userDAO.findOneByUsuarioSenha(user);
-       if(usuario==null){
-           throw new Exception("Usuário inválido");
-       }
-       return usuario;
+        if (user.getDsPassword().equals("") || user.getDsLogin().equals("")) {
+            throw new Exception("Usuário ou Senha inválido");
+        }
+        user.setDsPassword(getSenhaCriptografada(user.getDsPassword()));
+        Usuario usuario = userDAO.findOneByUsuarioSenha(user);
+        if (usuario == null) {
+            throw new Exception("Usuário inválido");
+        }
+        return usuario;
+    }
+    
+    private String getSenhaCriptografada(String senha) throws NoSuchAlgorithmException {
+        MessageDigest m = MessageDigest.getInstance("MD5");
+        m.update(senha.getBytes(), 0, senha.length());
+        senha = new BigInteger(1, m.digest()).toString(16);
+        return senha;
     }
     
 }

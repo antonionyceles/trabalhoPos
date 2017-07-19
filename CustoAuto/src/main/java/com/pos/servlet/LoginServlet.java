@@ -51,9 +51,10 @@ public class LoginServlet extends HttpServlet {
 
             }
 
-        } else if (request.getParameter("operacao").equals("2")) {
+        } else   {
             HttpSession session = request.getSession();
             session.setAttribute("usuario", null);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
 
         }
 

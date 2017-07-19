@@ -34,7 +34,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="<%=request.getContextPath() != null ? request.getContextPath() + "/" : ""%>menu.jsp">Início</a></li>
-                        <li><a href="<%=request.getContextPath() != null ? request.getContextPath() + "/" : ""%>LoginServlet?operacao=2">Sair</a></li>
+                        <li><a href="<%=request.getContextPath() != null ? request.getContextPath() + "/" : ""%>LoginServlet" >Sair</a></li>
 
                     </ul>
                 </div>
@@ -44,7 +44,10 @@
         <br>
         <br>
         <br>
-        <div class="alert alert-${messageType}" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>${messageType}!</strong> ${message}
-        </div>
+        <c:if test="${messageType!=null}">
+
+            <div class="alert alert-${messageType}" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>${messageType}!</strong> ${message}
+            </div>
+        </c:if>
