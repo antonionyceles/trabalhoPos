@@ -8,9 +8,6 @@ package com.pos.servlet;
 import com.pos.bo.UsuarioBO;
 import com.pos.entity.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,17 +38,16 @@ public class LoginServlet extends HttpServlet {
         if (request.getParameter("operacao").equals("1")) {
             Usuario user = new Usuario(request.getParameter("login"),
                     request.getParameter("senha"));
+            HttpSession session = request.getSession();
             try {
                 usuarioBo.isUser(user);
-                HttpSession session = request.getSession();
                 session.setAttribute("usuario", user);
-                response.sendRedirect("menu.jsp");
+                request.getRequestDispatcher("menu.jsp").forward(request, response);
             } catch (Exception ex) {
-                HttpSession session = request.getSession();
+
                 request.setAttribute("messageType", "danger");
                 request.setAttribute("message", ex.getLocalizedMessage());
-               
-                response.sendRedirect("index.jsp");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
 
             }
 

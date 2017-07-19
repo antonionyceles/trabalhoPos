@@ -12,7 +12,7 @@
     <form class="form" method="post" action="abastecer.jsp">
         <div id="sidebar">
             <div class="col-md-4">
-                <h3>Seja bem vindo: ${( request.getSession().getAttribute("usuario")).getDsLogin()}</h3>
+                <h3>Seja bem vindo: ${ sessionScope.usuario.getDsLogin()}</h3>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#">Veículos</a></li>
                     <ul class="nav nav-pills nav-stacked">
