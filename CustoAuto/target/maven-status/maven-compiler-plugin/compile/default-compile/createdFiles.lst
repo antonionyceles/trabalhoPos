@@ -11,6 +11,7 @@ com\pos\custoauto\Teste$1.class
 com\pos\util\GsonUtil.class
 com\pos\factory\ConnectionFactory.class
 com\pos\entity\VeiculoCliente.class
+com\pos\servlet\UsuarioServlet.class
 Teste.class
 com\pos\servlet\MovimentoServlet.class
 com\pos\entity\Veiculo.class

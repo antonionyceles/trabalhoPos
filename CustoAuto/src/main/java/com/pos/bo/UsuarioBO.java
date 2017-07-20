@@ -10,6 +10,7 @@ import com.pos.entity.Usuario;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 /**
  *
@@ -37,6 +38,11 @@ public class UsuarioBO {
         m.update(senha.getBytes(), 0, senha.length());
         senha = new BigInteger(1, m.digest()).toString(16);
         return senha;
+    }
+    
+    
+    public void savePreCadastro(String nome, String sobrenome, String senha, Date dtNascimento){
+        
     }
     
 }
