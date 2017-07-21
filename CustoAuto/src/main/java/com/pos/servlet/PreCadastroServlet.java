@@ -5,8 +5,17 @@
  */
 package com.pos.servlet;
 
+import com.pos.bo.UsuarioBO;
+import com.pos.entity.Cliente;
+import com.pos.entity.Usuario;
+import com.pos.util.DataUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author antoniony.lima
  */
-@WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
+@WebServlet(name = "PreCadastroServlet", urlPatterns = {"/PreCadastroServlet"})
 public class PreCadastroServlet extends HttpServlet {
 
     /**
@@ -30,19 +39,35 @@ public class PreCadastroServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UsuarioServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UsuarioServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        UsuarioBO usuarioBO = new UsuarioBO();
+
+        Cliente cliente = new Cliente(request.getParameter("nome"),
+                request.getParameter("sobrenome"),
+                request.getParameter("email"),
+                request.getParameter("celular"),
+                request.getParameter("telefone")
+        );
+        Usuario usuario = new Usuario(request.getParameter("email"),
+                request.getParameter("senha"), null, new Date());
+
+        String confirmaSenha = request.getParameter("confirmaSenha");
+        try {
+           cliente.setDtNascimento(DataUtil.getDataFromString(request.getParameter("dtNascimento")));
+            usuarioBO.savePreCadastro(cliente, usuario, confirmaSenha);
+            request.setAttribute("messageType", "info");
+            request.setAttribute("message", "Usuário cadastrado com sucesso");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } catch (Exception ex) {
+
+            request.setAttribute("cliente", cliente);
+            request.setAttribute("usuario", usuario);
+            request.setAttribute("messageType", "danger");
+            request.setAttribute("message", ex.getLocalizedMessage());
+//            request.getRequestDispatcher("").forward(request, response);
+            request.getRequestDispatcher("pre-cadastro.jsp").forward(request, response);
+
         }
     }
 
@@ -58,7 +83,11 @@ public class PreCadastroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(PreCadastroServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -72,7 +101,11 @@ public class PreCadastroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(PreCadastroServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

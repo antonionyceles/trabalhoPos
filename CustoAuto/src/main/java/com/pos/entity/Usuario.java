@@ -19,8 +19,18 @@ public class Usuario {
     private String dsPassword;
     private BigInteger cdCliente;
     private Date dtCadastro;
+    private Cliente cliente;
+    private String tpStatus;
 
     public Usuario() {
+    }
+
+    public Usuario(String dsLogin, String dsPassword, BigInteger cdCliente, Date dtCadastro) {
+
+        this.dsLogin = dsLogin;
+        this.dsPassword = dsPassword;
+        this.cdCliente = cdCliente;
+        this.dtCadastro = dtCadastro;
     }
 
     public Usuario(BigInteger cdUsuario, String dsLogin, String dsPassword, BigInteger cdCliente, Date dtCadastro) {
@@ -82,6 +92,22 @@ public class Usuario {
 
     public void setDtCadastro(Date dtCadastro) {
         this.dtCadastro = dtCadastro;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getTpStatus() {
+        return tpStatus;
+    }
+
+    public void setTpStatus(String tpStatus) {
+        this.tpStatus = tpStatus;
     }
 
 }

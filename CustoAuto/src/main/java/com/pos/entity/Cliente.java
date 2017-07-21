@@ -6,6 +6,7 @@
 package com.pos.entity;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 /**
  *
@@ -16,21 +17,28 @@ public class Cliente {
     private BigInteger cdCliente;
     private String nmNome;
     private String nmSobrenome;
-    private String dsCpf;
-    private String dsRg;
+    private Date dtNascimento;
     private String dsEmail;
     private String nrCelular;
     private String nrTelefone;
+    private String tpSituacao;
 
-    public Cliente(BigInteger cdCliente, String nmNome, String nmSobrenome, String dsCpf, String dsRg, String dsEmail, String nrCelular, String nrTelefone) {
-        this.cdCliente = cdCliente;
+    public Cliente(String nmNome, String nmSobrenome, String dsEmail, String nrCelular, String nrTelefone) {
+
         this.nmNome = nmNome;
         this.nmSobrenome = nmSobrenome;
-        this.dsCpf = dsCpf;
-        this.dsRg = dsRg;
+
         this.dsEmail = dsEmail;
         this.nrCelular = nrCelular;
         this.nrTelefone = nrTelefone;
+    }
+
+    public Date getDtNascimento() {
+        return dtNascimento;
+    }
+
+    public void setDtNascimento(Date dtNascimento) {
+        this.dtNascimento = dtNascimento;
     }
 
     public BigInteger getCdCliente() {
@@ -57,22 +65,6 @@ public class Cliente {
         this.nmSobrenome = nmSobrenome;
     }
 
-    public String getDsCpf() {
-        return dsCpf;
-    }
-
-    public void setDsCpf(String dsCpf) {
-        this.dsCpf = dsCpf;
-    }
-
-    public String getDsRg() {
-        return dsRg;
-    }
-
-    public void setDsRg(String dsRg) {
-        this.dsRg = dsRg;
-    }
-
     public String getDsEmail() {
         return dsEmail;
     }
@@ -97,7 +89,12 @@ public class Cliente {
         this.nrTelefone = nrTelefone;
     }
 
-    
-    
-    
+    public String getTpSituacao() {
+        return tpSituacao;
+    }
+
+    public void setTpSituacao(String tpSituacao) {
+        this.tpSituacao = tpSituacao;
+    }
+
 }

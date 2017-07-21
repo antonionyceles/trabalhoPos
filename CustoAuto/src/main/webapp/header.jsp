@@ -15,8 +15,25 @@
         <meta http-equiv="refresh" content="${session.maxInactiveInterval};url=${request.contextPath}/index.jsp"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">        
         <title>JSP Page</title>
+        <script>
+            $(document).ready(function () {
+
+                $('#loadingDiv').hide();
+            });
+            $('#loadingDiv')
+                    .hide()  // Hide it initially
+                    .ajaxStart(function () {
+                        $(this).show();
+                    })
+                    .ajaxStop(function () {
+                        $(this).hide();
+                    })
+                    ;
+
+        </script>
     </head>
     <body>
 
@@ -52,3 +69,7 @@
                 <strong>${messageType}!</strong> ${message}
             </div>
         </c:if>
+
+        <div id="loadingDiv">
+            <img src="<c:url value="resource/image/ajax-loader.gif" />"/>
+        </div>

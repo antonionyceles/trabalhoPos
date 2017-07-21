@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -139,6 +140,33 @@ public class UsuarioDAO extends DaoGenerico {
         }
         return usuario;
 
+    }
+
+    public void salvarPreCadastro(Usuario user) throws SQLException {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+            this.conexao = new ConnectionFactory().getConnection();
+            this.conexao.setAutoCommit(false);
+         String sqlCliente = "INSERT INTO DBCUSTOAUTO.CLIENTE(DS_EMAIL,"
+                 + "NM_NOME, NM_SOBRENOME, NR_CELULAR,NR_TELEFONE)"
+                 + " VALUES('"+user.getCliente().getDsEmail()+"','"+user.getCliente().getNmNome()+"','"+
+                 user.getCliente().getNmSobrenome()+"','"+
+                 user.getCliente().getNrCelular()+"','"+
+                 user.getCliente().getNrTelefone()+"');";
+            String sqlUsuario = "INSERT INTO DBCUSTOAUTO.USUARIO(CD_CLIENTE, DS_LOGIN, DS_PASSWORD, DT_CADASTRO, TP_STATUS)"
+                    + "VALUES(" + user.getCdCliente() + ",'" + user.getCliente().getDsEmail() + "','" + user.getDsPassword() + "','" + format.format(new Date()) + "','" + user.getTpStatus() + "');";
+            PreparedStatement stmt = this.conexao.prepareStatement(sqlUsuario);
+            // executa um select
+            ResultSet rs = stmt.executeQuery();
+            this.conexao.commit();
+        } catch (Exception ex) {
+            this.conexao.rollback();
+            throw ex;
+
+        } finally {
+            this.conexao.close();
+        }
     }
 
 }
