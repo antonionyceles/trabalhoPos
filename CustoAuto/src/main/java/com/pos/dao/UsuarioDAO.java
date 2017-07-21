@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,14 +25,14 @@ import java.util.logging.Logger;
  * @author antoniony.lima
  */
 public class UsuarioDAO extends DaoGenerico {
-
+    
     private Connection conexao;
-
+    
     @Override
     public void adiciona(Object obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public Object find(Object id) {
         Usuario user = null;
@@ -61,10 +62,10 @@ public class UsuarioDAO extends DaoGenerico {
         }
         return user;
     }
-
+    
     @Override
     public void deletar(Object id) {
-
+        
         this.conexao = new ConnectionFactory().getConnection();
         // cria um preparedStatement
         String sql = "delete usuario where cd_usuario= " + id;
@@ -77,9 +78,9 @@ public class UsuarioDAO extends DaoGenerico {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             // executa um select
         }
-
+        
     }
-
+    
     @Override
     public List<Object> findAll() {
         List<Object> userL = new ArrayList<>();
@@ -109,7 +110,7 @@ public class UsuarioDAO extends DaoGenerico {
         }
         return userL;
     }
-
+    
     public Usuario findOneByUsuarioSenha(Usuario user) throws SQLException {
         Usuario usuario = null;
         try {
@@ -139,34 +140,41 @@ public class UsuarioDAO extends DaoGenerico {
             throw ex;
         }
         return usuario;
-
+        
     }
-
+    
     public void salvarPreCadastro(Usuario user) throws SQLException {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
+            
             this.conexao = new ConnectionFactory().getConnection();
             this.conexao.setAutoCommit(false);
-         String sqlCliente = "INSERT INTO DBCUSTOAUTO.CLIENTE(DS_EMAIL,"
-                 + "NM_NOME, NM_SOBRENOME, NR_CELULAR,NR_TELEFONE)"
-                 + " VALUES('"+user.getCliente().getDsEmail()+"','"+user.getCliente().getNmNome()+"','"+
-                 user.getCliente().getNmSobrenome()+"','"+
-                 user.getCliente().getNrCelular()+"','"+
-                 user.getCliente().getNrTelefone()+"');";
+            PreparedStatement stmt;
+            ResultSet rs;
+            String sqlCliente = "INSERT INTO DBCUSTOAUTO.CLIENTE(DS_EMAIL,"
+                    + "NM_NOME, NM_SOBRENOME, NR_CELULAR,NR_TELEFONE)"
+                    + " VALUES('" + user.getCliente().getDsEmail() + "','" + user.getCliente().getNmNome() + "','"
+                    + user.getCliente().getNmSobrenome() + "','"
+                    + user.getCliente().getNrCelular() + "','"
+                    + user.getCliente().getNrTelefone() + "');";
+            stmt = this.conexao.prepareStatement(sqlCliente);
+            int cdCliente = stmt.executeUpdate(sqlCliente, Statement.RETURN_GENERATED_KEYS);
+            
+            user.setCdCliente(new BigInteger(String.valueOf(cdCliente)));
             String sqlUsuario = "INSERT INTO DBCUSTOAUTO.USUARIO(CD_CLIENTE, DS_LOGIN, DS_PASSWORD, DT_CADASTRO, TP_STATUS)"
                     + "VALUES(" + user.getCdCliente() + ",'" + user.getCliente().getDsEmail() + "','" + user.getDsPassword() + "','" + format.format(new Date()) + "','" + user.getTpStatus() + "');";
-            PreparedStatement stmt = this.conexao.prepareStatement(sqlUsuario);
+           
+            stmt = this.conexao.prepareStatement(sqlUsuario);
             // executa um select
-            ResultSet rs = stmt.executeQuery();
+            stmt.executeUpdate(sqlUsuario);
             this.conexao.commit();
         } catch (Exception ex) {
             this.conexao.rollback();
             throw ex;
-
+            
         } finally {
             this.conexao.close();
         }
     }
-
+    
 }
