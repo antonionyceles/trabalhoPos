@@ -7,6 +7,7 @@ package com.pos.servlet;
 
 import com.pos.bo.UsuarioBO;
 import com.pos.entity.Usuario;
+import com.pos.session.SessionSingleton;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 
         } else {
             HttpSession session = request.getSession();
-            session.setAttribute("usuario", null);
+            session.invalidate();
             request.getRequestDispatcher("index.jsp").forward(request, response);
 
         }
@@ -64,11 +65,11 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getParameter("operacao").equals("2")) {
-            request.getSession().invalidate();
             request.setAttribute("messageType", "info");
             request.setAttribute("message","Logout efetuado com sucesso!");
             request.getRequestDispatcher("index.jsp").forward(request, response);
-
+            SessionSingleton.deleteSession((Usuario) request.getSession().getAttribute("usuario"));
+            request.getSession().invalidate();
         }
     }
 

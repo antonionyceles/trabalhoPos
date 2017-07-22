@@ -8,6 +8,7 @@ package com.pos.bo;
 import com.pos.dao.UsuarioDAO;
 import com.pos.entity.Cliente;
 import com.pos.entity.Usuario;
+import com.pos.session.SessionSingleton;
 import com.pos.util.StringUtil;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -32,6 +33,10 @@ public class UsuarioBO {
         if (usuario == null) {
             throw new Exception("Usuário inválido");
         }
+        if(SessionSingleton.getSession(user)){
+            throw new Exception("Usuário já está conectado em outro dispositivo");
+        }
+        SessionSingleton.setSessionUsuario(user);
         return usuario;
     }
 

@@ -7,8 +7,11 @@ package com.pos.session;
 
 import com.pos.entity.Usuario;
 import com.pos.redis.connection.ConexaoRedis;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import redis.clients.jedis.Jedis;
 
 /**
@@ -21,7 +24,7 @@ public class SessionSingleton {
         Boolean result = false;
         ConexaoRedis con = new ConexaoRedis();
         Jedis jedis = con.conectar();
-        if (jedis.hexists("session:custoauto:" + user.getDsLogin(),"login")) {
+        if (jedis.exists("session:custoauto:" + user.getDsLogin())) {
             result = true;
         }
         return result;
@@ -32,12 +35,34 @@ public class SessionSingleton {
         ConexaoRedis con = new ConexaoRedis();
         Jedis jedis = con.conectar();
         Map<String, String> usuario = new HashMap<>();
+        Timestamp t = new Timestamp(new Date().getTime());
         usuario.put("login", user.getDsLogin());
+        usuario.put("timestamp", String.valueOf(t.getTime()));
         jedis.hmset("session:custoauto:" + user.getDsLogin(), usuario);
     }
-    
-    public static void deleteSession(Usuario user){
-        
+
+    public static void deleteSession(Usuario user) {
+        ConexaoRedis con = new ConexaoRedis();
+        Jedis jedis = con.conectar();
+        System.out.println(jedis.del("session:custoauto:" + user.getDsLogin()));
+
+    }
+
+    public static void getAllKeys() {
+        ConexaoRedis con = new ConexaoRedis();
+        Jedis jedis = con.conectar();
+        Set<String> keys = jedis.keys("session:custoauto:antoniony");
+        keys.forEach(obj -> {
+            System.out.println(obj);
+            jedis.del(obj);
+        });
+       keys = jedis.keys("session:custoauto:antoniony");
+        keys.forEach(obj -> {
+            System.out.println("oiii");
+            System.out.println(obj);
+          
+        });
+
     }
 
 }
