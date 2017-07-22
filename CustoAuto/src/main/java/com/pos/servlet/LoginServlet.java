@@ -51,13 +51,25 @@ public class LoginServlet extends HttpServlet {
 
             }
 
-        } else   {
+        } else {
             HttpSession session = request.getSession();
             session.setAttribute("usuario", null);
             request.getRequestDispatcher("index.jsp").forward(request, response);
 
         }
 
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if (request.getParameter("operacao").equals("2")) {
+            request.getSession().invalidate();
+            request.setAttribute("messageType", "info");
+            request.setAttribute("message","Logout efetuado com sucesso!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+
+        }
     }
 
     /**

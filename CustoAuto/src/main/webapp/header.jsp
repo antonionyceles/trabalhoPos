@@ -7,7 +7,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="com.pos.entity.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("index.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,7 +55,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="<%=request.getContextPath() != null ? request.getContextPath() + "/" : ""%>menu.jsp">Início</a></li>
-                        <li><a href="<%=request.getContextPath() != null ? request.getContextPath() + "/" : ""%>LoginServlet" >Sair</a></li>
+                        <li><a href="<%=request.getContextPath() != null ? request.getContextPath() + "/" : ""%>LoginServlet?operacao=2"  >Sair</a></li>
 
                     </ul>
                 </div>

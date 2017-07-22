@@ -1,6 +1,8 @@
 
 import com.pos.dao.UsuarioDAO;
+import com.pos.entity.Usuario;
 import com.pos.factory.ConnectionFactory;
+import com.pos.session.SessionSingleton;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -19,8 +21,9 @@ public class Teste {
      * @param args the command line arguments
      */
     public static void main(String[] args)  {
-        UsuarioDAO userDAO = new UsuarioDAO();
-        userDAO.find(1);
+        Usuario user = new Usuario("antonionyceles@hotmail.com", "654987");
+        SessionSingleton.setSessionUsuario(user);
+        SessionSingleton.getSession(user);
     }
 
 }

@@ -71,7 +71,7 @@ public class UsuarioBO {
         cliente.setNrTelefone(StringUtil.retiraMaskTel(cliente.getNrTelefone()));
 
         usuario.setCliente(cliente);
-
+        usuario.setDsPassword(getSenhaCriptografada(usuario.getDsPassword()));
         usuario.setCliente(cliente);
         userDAO = new UsuarioDAO();
         userDAO.salvarPreCadastro(usuario);
