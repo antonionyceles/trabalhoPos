@@ -27,6 +27,7 @@ public class SessionSingleton {
         if (jedis.exists("session:custoauto:" + user.getDsLogin())) {
             result = true;
         }
+        jedis.disconnect();
         return result;
 
     }
@@ -39,13 +40,14 @@ public class SessionSingleton {
         usuario.put("login", user.getDsLogin());
         usuario.put("timestamp", String.valueOf(t.getTime()));
         jedis.hmset("session:custoauto:" + user.getDsLogin(), usuario);
+        jedis.disconnect();
     }
 
     public static void deleteSession(Usuario user) {
         ConexaoRedis con = new ConexaoRedis();
         Jedis jedis = con.conectar();
         System.out.println(jedis.del("session:custoauto:" + user.getDsLogin()));
-
+        jedis.disconnect();
     }
 
     public static void getAllKeys() {
@@ -56,12 +58,13 @@ public class SessionSingleton {
             System.out.println(obj);
             jedis.del(obj);
         });
-       keys = jedis.keys("session:custoauto:antoniony");
+        keys = jedis.keys("session:custoauto:antoniony");
         keys.forEach(obj -> {
             System.out.println("oiii");
             System.out.println(obj);
-          
+
         });
+        jedis.disconnect();
 
     }
 
