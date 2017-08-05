@@ -6,8 +6,10 @@
 <%@ include file = "../header.jsp" %>
 
 <%@page import="com.pos.entity.Usuario"%>
-<div id="main" class="container-fluid" >
-
+<div id="main" class="container" >
+<div class="panel panel-default">
+    <div class="col-md-12"><h1>Cadastro de veículo</h1></div>
+    
     <form class="form" method="post" action="../VeiculoServlet">
         <input type="hidden" name="operacao" value="<%=request.getParameter("operacao")%>"/>
         <div class="row col-md-6">
@@ -23,13 +25,15 @@
                 <input type="text" name="modelo" class="form-control"/>
             </div>
 
-            <div class="row pull-right">
+         
                 <div class="col-md-12 ">
-                    <input type="submit" value="Adicionar Veículo" />
+                    <input type="submit" class="btn btn-primary" value="Adicionar Veículo" />
                 </div>
-            </div>
+           
         </div>
     </form>
+        <div class="clearfix"></div>
+</div>
 </div>
 
 

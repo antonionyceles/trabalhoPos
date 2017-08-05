@@ -1,7 +1,7 @@
 body {
    background: #F2F2F2;
     padding-top: 90px;
-    font-family: 'Oxygen', sans-serif;
+    font-family: 'Raleway', sans-serif;
 	    background-size: cover;
     
 }
@@ -11,6 +11,10 @@ body {
 .panel-default{
   
     padding: 15px;
+}
+
+.panel h2{
+    color: #666;
 }
 
 .navbar{

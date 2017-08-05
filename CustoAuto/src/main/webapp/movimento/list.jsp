@@ -1,4 +1,4 @@
-<%-- 
+ <%-- 
     Document   : form
     Created on : 17/06/2017, 14:47:58
     Author     : aluno
@@ -15,11 +15,12 @@
 <%@ include file = "../header.jsp" %>
 <%BigDecimal total = new BigDecimal("0");%>
 
-<div id="main" class="container-fluid" style="margin-top: 50px">
+<div id="main" class="container" >
+    <div class="panel panel-default">
 
     <div id="top" class="row">
         <div class="col-sm-3">
-            <h2>Movimentacao Cadastrada</h2>
+            <h2>Movimentação Cadastrada</h2>
         </div>
         <div class="col-sm-6">
 
@@ -74,9 +75,9 @@
                 </tbody >
 
             </table>
-            <div class="row">Total: <%=total%></div>
+            <p>Total: <%=total%></p>
         </div>
-
+</div>
     </div> <!-- /#list -->
 
     <div id="bottom" class="row">
