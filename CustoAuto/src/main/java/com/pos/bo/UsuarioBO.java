@@ -28,6 +28,8 @@ public class UsuarioBO {
             throw new Exception("Usuário ou Senha inválido");
         }
         user.setSenha(getSenhaCriptografada(user.getSenha()));
+        System.out.println("Aqui");
+        //System.out.println(getSenhaCriptografada(user.getSenha()));
         Usuario usuario = userDAO.findOneByUsuarioSenha(user);
         if (usuario == null) {
             throw new Exception("Usuário inválido");

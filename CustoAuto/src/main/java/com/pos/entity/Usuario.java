@@ -25,6 +25,11 @@ public class Usuario {
         
     }
 
+    public Usuario(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
+    }   
+    
     public Usuario(BigInteger id, String nome, String email, String senha, Date dataRegistro, Date dataAtualizacao) {
         this.id = id;
         this.nome = nome;
@@ -69,7 +74,7 @@ public class Usuario {
     }
 
     public String getSenha() {
-        return senha;
+        return this.senha;
     }
 
     public void setSenha(String senha) {

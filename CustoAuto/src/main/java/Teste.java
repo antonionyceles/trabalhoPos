@@ -21,9 +21,9 @@ public class Teste {
      * @param args the command line arguments
      */
     public static void main(String[] args)  {
-        Usuario user = new Usuario("antonionyceles", "654987");
+       /* Usuario user = new Usuario("antonionyceles", "654987");
 //        SessionSingleton.setSessionUsuario(user);
-        SessionSingleton.getAllKeys();
+        SessionSingleton.getAllKeys();*/
     }
 
 }

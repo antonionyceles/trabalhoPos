@@ -4,9 +4,11 @@ package com.pos.servlet;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.pos.entity.Movimentacao;
+
+import com.pos.entity.DespesaVeiculo;
+import com.pos.entity.TipoDespesa;
 import com.pos.entity.Usuario;
-import com.pos.entity.Veiculo;
+import com.pos.entity.VeiculoUsuario;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -64,28 +66,33 @@ public class MovimentoServlet extends HttpServlet {
     }
 
     private void inserirMovimentacao(HttpServletRequest request, HttpSession session) throws ParseException {
-        Map<String, Movimentacao> movMap;
+        Map<String, DespesaVeiculo> movMap;
         if (session.getAttribute("movimentacaoList") == null) {
-            movMap = new HashMap<String, Movimentacao>();
+            movMap = new HashMap<String, DespesaVeiculo>();
 
         } else {
-            movMap = (Map<String, Movimentacao>) session.getAttribute("movimentacaoList");
+            movMap = (Map<String, DespesaVeiculo>) session.getAttribute("movimentacaoList");
 
         }
         String data = (String) request.getParameter("data");
         
-        Map vcMap = (Map<String, Veiculo>) session.getAttribute("veiculoList");
-        Movimentacao vc = new Movimentacao(String.valueOf(Math.random()),
-                (Usuario) session.getAttribute("usuario"),
-                (Veiculo) vcMap.get(request.getParameter("veiculo")),
-                new SimpleDateFormat("YYYY-MM-dd").parse(data),
-                new BigInteger((String) request.getParameter("km")),
-                new BigDecimal((String) request.getParameter("valor")));
-        movMap.put(vc.getId(), vc);
+        Map vcMap = (Map<String, VeiculoUsuario>) session.getAttribute("veiculoList");
+        DespesaVeiculo vc = new DespesaVeiculo(BigInteger.valueOf( 0 ), 
+                (VeiculoUsuario) vcMap.get(request.getParameter("veiculo")), 
+                new SimpleDateFormat("YYYY-MM-dd").parse(data), 
+                TipoDespesa.Pecas, 
+                data, 
+                Integer.parseInt(request.getParameter("km")), 
+                Double.parseDouble(request.getParameter("valor")), 
+                new SimpleDateFormat("YYYY-MM-dd").parse(data), 
+                new SimpleDateFormat("YYYY-MM-dd").parse(data));
+                
+        movMap.put(vc.getId().toString(), vc);
         session.setAttribute("movimentacaoList", movMap);
     }
 
     private void editarMovimentacao(HttpServletRequest request, HttpSession session) throws ParseException {
+        /*
         Map<String, Movimentacao> movMap = (Map<String, Movimentacao>) session.getAttribute("movimentacaoList");
         String id = request.getParameter("id");
         Map vcMap = (Map<String, Veiculo>) session.getAttribute("veiculoList");
@@ -97,7 +104,7 @@ public class MovimentoServlet extends HttpServlet {
                 new BigDecimal((String) request.getParameter("valor")));
         movMap.put(vc.getId(), vc);
         session.setAttribute("movimentacaoList", movMap);
-
+        */
     }
 
     private void deletarMovimentacao(HttpServletRequest request, HttpSession session) {
