@@ -13,14 +13,14 @@ import java.util.Date;
  * @author antoniony.lima
  */
 public class VeiculoUsuario {
-    
+
     private BigInteger id;
     private Usuario usuario;
     private TipoVeiculo tipo;
     private String descricao;
     private String placa;
     private Date dataCadastro;
-    private Date dataAtualizacao;    
+    private Date dataAtualizacao;
 
     public VeiculoUsuario(BigInteger id, Usuario usuario, TipoVeiculo tipo, String descricao, String placa, Date dataCadastro, Date dataAtualizacao) {
         this.id = id;
@@ -30,6 +30,10 @@ public class VeiculoUsuario {
         this.placa = placa;
         this.dataCadastro = dataCadastro;
         this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public VeiculoUsuario(BigInteger id) {
+        this.id = id;
     }
 
     public BigInteger getId() {
@@ -87,8 +91,5 @@ public class VeiculoUsuario {
     public void setDataAtualizacao(Date dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
     }
-    
-       
-    
-    
+
 }
