@@ -14,38 +14,27 @@ import java.util.Date;
  */
 public class Usuario {
 
-    private BigInteger cdUsuario;
-    private String dsLogin;
-    private String dsPassword;
-    private BigInteger cdCliente;
-    private Date dtCadastro;
-    private Cliente cliente;
-    private String tpStatus;
-
+    private BigInteger id;
+    private String nome;
+    private String email;
+    private String senha;
+    private Date dataRegistro;
+    private Date dataAtualizacao;
+    
     public Usuario() {
+        
     }
 
-    public Usuario(String dsLogin, String dsPassword, BigInteger cdCliente, Date dtCadastro) {
-
-        this.dsLogin = dsLogin;
-        this.dsPassword = dsPassword;
-        this.cdCliente = cdCliente;
-        this.dtCadastro = dtCadastro;
+    public Usuario(BigInteger id, String nome, String email, String senha, Date dataRegistro, Date dataAtualizacao) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.dataRegistro = dataRegistro;
+        this.dataAtualizacao = dataAtualizacao;
     }
-
-    public Usuario(BigInteger cdUsuario, String dsLogin, String dsPassword, BigInteger cdCliente, Date dtCadastro) {
-        this.cdUsuario = cdUsuario;
-        this.dsLogin = dsLogin;
-        this.dsPassword = dsPassword;
-        this.cdCliente = cdCliente;
-        this.dtCadastro = dtCadastro;
-    }
-
-    public Usuario(String dsLogin, String dsPassword) {
-        this.dsLogin = dsLogin;
-        this.dsPassword = dsPassword;
-    }
-
+    
+    /*
     public Boolean isUser(Usuario login) {
         Boolean result = false;
         if (login.getDsLogin().equalsIgnoreCase("admin") && login.getDsPassword().equals("admin")) {
@@ -53,61 +42,56 @@ public class Usuario {
         }
         return result;
     }
+    */
 
-    public BigInteger getCdUsuario() {
-        return cdUsuario;
+    public BigInteger getId() {
+        return id;
     }
 
-    public void setCdUsuario(BigInteger cdUsuario) {
-        this.cdUsuario = cdUsuario;
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
-    public String getDsLogin() {
-        return dsLogin;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDsLogin(String dsLogin) {
-        this.dsLogin = dsLogin;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getDsPassword() {
-        return dsPassword;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDsPassword(String dsPassword) {
-        this.dsPassword = dsPassword;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public BigInteger getCdCliente() {
-        return cdCliente;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setCdCliente(BigInteger cdCliente) {
-        this.cdCliente = cdCliente;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public Date getDtCadastro() {
-        return dtCadastro;
+    public Date getDataRegistro() {
+        return dataRegistro;
     }
 
-    public void setDtCadastro(Date dtCadastro) {
-        this.dtCadastro = dtCadastro;
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Date getDataAtualizacao() {
+        return dataAtualizacao;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setDataAtualizacao(Date dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
     }
-
-    public String getTpStatus() {
-        return tpStatus;
-    }
-
-    public void setTpStatus(String tpStatus) {
-        this.tpStatus = tpStatus;
-    }
-
+    
+    
+    
 }
