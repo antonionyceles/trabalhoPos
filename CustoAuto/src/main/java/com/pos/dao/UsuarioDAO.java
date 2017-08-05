@@ -74,7 +74,7 @@ public class UsuarioDAO {
         try {
             this.conexao = new ConnectionFactory().getConnection();
             // cria um preparedStatement
-            String sql = "select * from usuario where email = ? AND password = ?;";
+            String sql = "select * from usuario where email = ? AND senha = ?;";
             PreparedStatement stmt = this.conexao.prepareStatement(sql);
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getSenha());
@@ -82,7 +82,8 @@ public class UsuarioDAO {
             ResultSet rs = stmt.executeQuery();
             // itera no ResultSet
             while (rs.next()) {
-                user = new Usuario( BigInteger.valueOf( rs.getLong("id") ),
+                System.out.println( rs.getLong("id"));
+                usuario = new Usuario( BigInteger.valueOf( rs.getLong("id") ),
                                    rs.getString("nome"),
                                    rs.getString("email"),
                                    rs.getString("senha"),
@@ -93,6 +94,7 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw ex;
+            
         }
         return usuario;        
     }  
