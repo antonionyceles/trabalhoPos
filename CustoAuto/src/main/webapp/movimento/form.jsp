@@ -2,9 +2,13 @@
 <%@page import="java.util.Map"%>
 <%@page import="com.pos.entity.Veiculo"%>
 <%@ include file = "../header.jsp" %>
-<div id="main" class="container-fluid" >
+<div id="main" class="container" >
+    
+    <div class="panel panel-default">
     <form id="movimentacao" action="../MovimentoServlet" method="post">
         <input type="hidden" name="operacao" value="<%=request.getParameter("operacao")%>"/>
+        
+        <div class="col-md-12">
         <div class="form-group col-md-6">
             <label for="categoria"> Categoria de Gasto</label>
             <select name="categoria" class="form-control">
@@ -17,9 +21,19 @@
         <div class="form-group col-md-6">
             <label for="data">Data</label>
             <input type="date" class="form-control" name="data"/>
-            <label for="valor">Valor R$</label>
-            <input type="number" class="form-control" name="valor" />
+          
         </div>
+        </div>
+        
+          
+        <div class="col-md-12">
+            
+              <div class="form-group col-md-6">
+            
+              <label for="valor">Valor R$</label>
+            <input type="number" class="form-control" name="valor" />
+             </div>
+        
         <div class="form-group col-md-6">
             <label for="veiculo"> Veículo</label>
             <select name="veiculo" class="form-control">
@@ -41,13 +55,18 @@
             <%   }%>
             <label for="km">Km da despesa</label>
             <input type="number" class="form-control" name="km"/>
-        </div>
-        <div class="row pull-right">
+        </div>        </div>
+
+      
             <div class="col-md-12 ">
-                <input type="submit" value="Adicionar Despesa" />
+                <input type="submit" class="btn btn-primary" value="Adicionar Despesa" />
             </div>
-        </div>
+       
     </form>
+             <div class="clearfix"></div>
+</div>
+
+           
 </div>
 
 <%@include file="../footer.jsp" %>

@@ -13,7 +13,9 @@
 
 <%@ include file = "../header.jsp" %>
 
-<div id="main" class="container-fluid" style="margin-top: 50px">
+<div id="main" class="container" >
+    
+     <div class="panel panel-default">
 
     <div id="top" class="row">
         <div class="col-sm-3">
@@ -80,6 +82,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
 
     </div> <!-- /#list -->
 
