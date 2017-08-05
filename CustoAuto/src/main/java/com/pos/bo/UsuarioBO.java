@@ -34,10 +34,10 @@ public class UsuarioBO {
         if (usuario == null) {
             throw new Exception("Usuário inválido");
         }
-        if(SessionSingleton.getSession(user)){
-            throw new Exception("Usuário já está conectado em outro dispositivo");
-        }
-        SessionSingleton.setSessionUsuario(user);
+//        if(SessionSingleton.getSession(user)){
+//            throw new Exception("Usuário já está conectado em outro dispositivo");
+//        }
+//        SessionSingleton.setSessionUsuario(user);
         return usuario;
     }
 
