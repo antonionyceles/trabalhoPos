@@ -8,13 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,7 +24,7 @@ public class UsuarioDAO {
             PreparedStatement stmt;
             ResultSet rs;            
             String sqlUsuario = "INSERT INTO usuario(`nome`, `email`, `senha`)"
-                    + "VALUES(?, ?, md5(?));";
+                    + "VALUES(?, ?, ?);";
             stmt = this.conexao.prepareStatement(sqlUsuario);
             stmt.setString(1, usuario.getNome() );
             stmt.setString(2, usuario.getEmail() );
@@ -81,7 +74,7 @@ public class UsuarioDAO {
         try {
             this.conexao = new ConnectionFactory().getConnection();
             // cria um preparedStatement
-            String sql = "select * from usuario where email = ? AND password = md5(?);";            
+            String sql = "select * from usuario where email = ? AND password = ?;";
             PreparedStatement stmt = this.conexao.prepareStatement(sql);
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getSenha());
