@@ -6,7 +6,10 @@ body {
     
 }
 
-
+.panel-default{
+  
+    padding: 15px;
+}
 
 .navbar{
     padding: 0 15px;
@@ -120,3 +123,6 @@ body {
 	background-color: #1CA347;
 	border-color: #1CA347;
 }
+
+
+
