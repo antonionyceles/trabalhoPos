@@ -15,6 +15,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -104,5 +106,47 @@ public class VeiculoUsuarioDAO {
         } finally {
             this.conexao.close();
         }
+    }
+    
+    public List<VeiculoUsuario> findByUser(BigInteger id) {
+        List<VeiculoUsuario> veiculos = new ArrayList<VeiculoUsuario>();
+        try {
+            this.conexao = new ConnectionFactory().getConnection();
+            // cria um preparedStatement
+            String sql = "select * from veiculo_usuario where usuario_id = ? ORDER BY placa";
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            stmt.setBigDecimal(1, new BigDecimal(id));
+
+            // executa um select
+            ResultSet rs = stmt.executeQuery();
+            // itera no ResultSet
+            while (rs.next()) {
+                System.out.println(rs.getString("placa"));
+                VeiculoUsuario veiculo = new VeiculoUsuario(BigInteger.valueOf(rs.getLong("id")),
+                        new UsuarioDAO().findById(BigInteger.valueOf(rs.getLong("usuario_id"))),
+                        this.getTipoVeiculo(rs.getString("tipo")),
+                        rs.getString("descricao"),
+                        rs.getString("placa"),
+                        rs.getDate("data_cadastro"),
+                        rs.getDate("data_atualizacao"));
+                        veiculos.add(veiculo);
+
+            }
+            rs.close();
+            this.conexao.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return veiculos;
+    }
+    
+    public TipoVeiculo getTipoVeiculo(String codigo){
+        TipoVeiculo[] tipos = TipoVeiculo.values();
+        for (int i = 0; i < tipos.length; i++) {
+            if (tipos[i].codigo().equals(codigo)) {
+                return tipos[i];
+            }            
+        }
+        return TipoVeiculo.Outros;
     }
 }

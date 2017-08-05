@@ -7,14 +7,18 @@ package com.pos.servlet;
 
 import com.pos.bo.VeiculoBO;
 import com.pos.dao.UsuarioDAO;
+import com.pos.dao.VeiculoUsuarioDAO;
 import com.pos.entity.TipoVeiculo;
 import com.pos.entity.Usuario;
 
 import com.pos.entity.VeiculoUsuario;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,6 +47,7 @@ public class VeiculoServlet extends HttpServlet {
             throws ServletException, IOException {
         VeiculoBO veiculoBO = new VeiculoBO();
         VeiculoUsuario vc;
+        List<VeiculoUsuario> veiculos = new ArrayList<VeiculoUsuario>();
         try {
             switch (request.getParameter("operacao")) {
                 case "1":
@@ -50,7 +55,7 @@ public class VeiculoServlet extends HttpServlet {
                     vc = new VeiculoUsuario(BigInteger.ONE,
                             // (Usuario) request.getSession().getAttribute("usuario"),
                             new UsuarioDAO().findById(BigInteger.valueOf(4)),
-                            veiculoBO.getTipoVeiculo(request.getParameter("tipo")),
+                            new VeiculoUsuarioDAO().getTipoVeiculo(request.getParameter("tipo")),
                             request.getParameter("descricao"),
                             request.getParameter("placa"),
                             new Date(),
@@ -80,11 +85,15 @@ public class VeiculoServlet extends HttpServlet {
                     response.sendRedirect("menu.jsp");
                     break;
             }
+            veiculos = veiculoBO.findByUser( BigInteger.valueOf(4 ) );
         } catch (Exception ex) {
             request.setAttribute("messageType", "error");
             request.setAttribute("message", ex.getLocalizedMessage());
         }
-        response.sendRedirect("veiculo/list.jsp");
+        System.out.println("setar a lista");
+        request.setAttribute("listaVeiculos", veiculos);        
+        //response.sendRedirect("veiculo/list.jsp");
+        request.getRequestDispatcher("veiculo/list.jsp").forward(request, response);
 
     }
 

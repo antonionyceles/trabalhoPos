@@ -8,6 +8,9 @@ package com.pos.bo;
 import com.pos.dao.VeiculoUsuarioDAO;
 import com.pos.entity.TipoVeiculo;
 import com.pos.entity.VeiculoUsuario;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -33,14 +36,14 @@ public class VeiculoBO {
         }
     }
     
-    public TipoVeiculo getTipoVeiculo(String codigo){
-        TipoVeiculo[] tipos = TipoVeiculo.values();
-        for (int i = 0; i < tipos.length; i++) {
-            if (tipos[i].codigo().equals(codigo)) {
-                return tipos[i];
-            }            
-        }
-        return TipoVeiculo.Outros;
+    public List<VeiculoUsuario> findByUser(BigInteger id) {
+        List<VeiculoUsuario> veiculos = new ArrayList<VeiculoUsuario>();        
+        try {
+            veiculos = veiculoDAO.findByUser(id);
+            return veiculos;
+        } catch (Exception ex) {
+            throw ex;
+        }    
     }
 
 }

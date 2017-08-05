@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.pos.entity.VeiculoUsuario"%>
@@ -38,7 +39,7 @@
 
     <hr />
     <div id="list" class="row">
-
+        
         <div class="table-responsive col-md-12">
             <table class="table table-striped" cellspacing="0" cellpadding="0">
                 <thead>
@@ -53,29 +54,28 @@
                 </thead>
                 <tbody>
                     
-                    <%
-                        if (request.getSession().getAttribute("veiculoList") != null) {
-                            Map<String, VeiculoUsuario> mp = (Map<String, VeiculoUsuario>) request.getSession().getAttribute("veiculoList");
+                    <%  
+                        List<VeiculoUsuario> lista = (List<VeiculoUsuario>)request.getAttribute("listaVeiculos");                        
+                        if (lista == null ){
+                            lista = new ArrayList<VeiculoUsuario>();
+                        }
+                        
+                    %>                    
+                        <% for (VeiculoUsuario vc : lista) { %>
+                            </tr>
+                                <td><%= vc.getId()%></td>
+                                <td><%= vc.getTipo() %></td>
+                                <td><%= vc.getDescricao()%></td>
+                                <td><%= vc.getPlaca()%></td>
+                                
+                                <td class="actions">
+                                    <a class="btn btn-warning btn-xs" href="edit.jsp?operacao=2&id=<%=vc.getId()%>">Editar</a>
+                                    <a class="btn btn-danger btn-xs"  href="../VeiculoServlet?operacao=3&id=<%=vc.getId()%>" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                                </td>
+                            <tr>                              
 
-                            Iterator it = mp.entrySet().iterator();
-                            while (it.hasNext()) {
-                                Map.Entry pair    = (Map.Entry) it.next();
-                                VeiculoUsuario vc = (VeiculoUsuario) pair.getValue();
-
-                    %>
-                    <tr>
-<!--                        <td><%= vc.getId()%></td>
-                        <td><%= vc.getTipo() %></td>
-                        <td><%= vc.getDescricao()%></td>
-                        <td><%= vc.getPlaca()%></td>-->
-
-                        <td class="actions">                            
-                            <a class="btn btn-warning btn-xs" href="edit.jsp?operacao=2&id=<%=vc.getId()%>">Editar</a>
-                            <a class="btn btn-danger btn-xs"  href="../VeiculoServlet?operacao=3&id=<%=vc.getId()%>" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                        </td>
+                        <%} %>>                        
                     </tr>
-                    <%}
-                        }%>
 
                 </tbody>
             </table>
