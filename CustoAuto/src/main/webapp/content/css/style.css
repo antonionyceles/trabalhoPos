@@ -9,8 +9,21 @@ body {
 
 
 .navbar{
+    padding: 0 15px;
     background: #3498DB;
 }
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: #ddd;
+}
+
+
+
+
 .panel-login {
 	border-color: #ccc;
 	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
