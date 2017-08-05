@@ -6,6 +6,7 @@
 package com.pos.bo;
 
 import com.pos.dao.VeiculoUsuarioDAO;
+import com.pos.entity.TipoVeiculo;
 import com.pos.entity.VeiculoUsuario;
 
 /**
@@ -24,12 +25,22 @@ public class VeiculoBO {
         }
     }
 
-    public void editar(VeiculoUsuario vc) {
+    public void editar(VeiculoUsuario vc) throws Exception {
         try {
             veiculoDAO.editar(vc);
         } catch (Exception ex) {
             throw ex;
         }
+    }
+    
+    public TipoVeiculo getTipoVeiculo(String codigo){
+        TipoVeiculo[] tipos = TipoVeiculo.values();
+        for (int i = 0; i < tipos.length; i++) {
+            if (tipos[i].codigo().equals(codigo)) {
+                return tipos[i];
+            }            
+        }
+        return TipoVeiculo.Outros;
     }
 
 }

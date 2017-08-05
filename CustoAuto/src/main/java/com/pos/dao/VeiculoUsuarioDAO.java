@@ -26,23 +26,24 @@ public class VeiculoUsuarioDAO {
 
     public void add(VeiculoUsuario veiculo) throws SQLException {
         try {
+            System.out.println("Add");
             this.conexao = new ConnectionFactory().getConnection();
             this.conexao.setAutoCommit(false);
             PreparedStatement stmt;
             ResultSet rs;
-            String sqlUsuario = "INSERT INTO veiculo_usuario(`usuario_id`, `tipo`, `descricao`, `placa`)"
-                    + "VALUES(?, ?, ?);";
+            String sqlUsuario = "INSERT INTO veiculo_usuario (usuario_id, tipo, descricao, placa) VALUES (?, ?, ?, ?);";
             stmt = this.conexao.prepareStatement(sqlUsuario);
             stmt.setBigDecimal(1, new BigDecimal(veiculo.getUsuario().getId()));
-            stmt.setString(2, veiculo.getTipo().codigo());
+            stmt.setString(2, veiculo.getTipo());
             stmt.setString(3, veiculo.getDescricao());
             stmt.setString(4, veiculo.getPlaca());
 
             // executa um select
-            stmt.executeUpdate(sqlUsuario);
+            stmt.executeUpdate();
             this.conexao.commit();
         } catch (Exception ex) {
             this.conexao.rollback();
+            System.out.println(ex.getMessage());
             throw ex;
         } finally {
             this.conexao.close();
@@ -88,14 +89,14 @@ public class VeiculoUsuarioDAO {
                     + "VALUES(?, ?, ?,?) WHERE usuario_id = ?;";
             stmt = this.conexao.prepareStatement(sqlUsuario);
 
-            stmt.setString(1, veiculo.getTipo().codigo());
+            stmt.setString(1, veiculo.getTipo());
             stmt.setString(2, veiculo.getDescricao());
             stmt.setString(3, veiculo.getPlaca());
             stmt.setDate(4, new Date(veiculo.getDataAtualizacao().getTime()));
             stmt.setBigDecimal(5, new BigDecimal(veiculo.getUsuario().getId()));
 
             // executa um select
-            stmt.executeUpdate(sqlUsuario);
+            stmt.executeUpdate();
             this.conexao.commit();
         } catch (Exception ex) {
             this.conexao.rollback();

@@ -7,7 +7,7 @@
 
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="com.pos.entity.Veiculo"%>
+<%@page import="com.pos.entity.VeiculoUsuario"%>
 <%@page import="java.util.List"%>
 
 <%@ include file = "../header.jsp" %>
@@ -47,31 +47,31 @@
                     <tr>
                         <th>Cod</th>
                         <th>Tipo</th>
-                        <th>Modelo</th>
-                        <th>Status</th>
+                        <th>Descrição</th>
+                        <th>Placa</th>
 
                         <th class="actions">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
                     <%
                         if (request.getSession().getAttribute("veiculoList") != null) {
-                            Map<String, Veiculo> mp = (Map<String, Veiculo>) request.getSession().getAttribute("veiculoList");
+                            Map<String, VeiculoUsuario> mp = (Map<String, VeiculoUsuario>) request.getSession().getAttribute("veiculoList");
 
                             Iterator it = mp.entrySet().iterator();
                             while (it.hasNext()) {
-                                Map.Entry pair = (Map.Entry) it.next();
-                                Veiculo vc
-                                        = (Veiculo) pair.getValue();
+                                Map.Entry pair    = (Map.Entry) it.next();
+                                VeiculoUsuario vc = (VeiculoUsuario) pair.getValue();
+
                     %>
                     <tr>
-                        <td><%= vc.getId()%></td>
-                        <td><%= vc.getTipo()%></td>
-                        <td><%= vc.getModelo()%></td>
-                        <td><%= vc.getAtivo()%></td>
+<!--                        <td><%= vc.getId()%></td>
+                        <td><%= vc.getTipo() %></td>
+                        <td><%= vc.getDescricao()%></td>
+                        <td><%= vc.getPlaca()%></td>-->
 
-                        <td class="actions">
-                            <!--<a class="btn btn-success btn-xs" href="view.html">Visualizar</a>-->
+                        <td class="actions">                            
                             <a class="btn btn-warning btn-xs" href="edit.jsp?operacao=2&id=<%=vc.getId()%>">Editar</a>
                             <a class="btn btn-danger btn-xs"  href="../VeiculoServlet?operacao=3&id=<%=vc.getId()%>" data-toggle="modal" data-target="#delete-modal">Excluir</a>
                         </td>

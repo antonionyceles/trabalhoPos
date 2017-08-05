@@ -6,6 +6,7 @@
 package com.pos.servlet;
 
 import com.pos.bo.VeiculoBO;
+import com.pos.dao.UsuarioDAO;
 import com.pos.entity.TipoVeiculo;
 import com.pos.entity.Usuario;
 
@@ -45,13 +46,16 @@ public class VeiculoServlet extends HttpServlet {
         try {
             switch (request.getParameter("operacao")) {
                 case "1":
+                    System.out.println("VV");
                     vc = new VeiculoUsuario(BigInteger.ONE,
-                            (Usuario) request.getSession().getAttribute("usuario"),
-                            TipoVeiculo.Moto,
+                            // (Usuario) request.getSession().getAttribute("usuario"),
+                            new UsuarioDAO().findById(BigInteger.valueOf(4)),
+                            veiculoBO.getTipoVeiculo(request.getParameter("tipo")),
                             request.getParameter("descricao"),
                             request.getParameter("placa"),
                             new Date(),
                             null);
+                    System.out.println("VV-ADD");
                     veiculoBO.adicionar(vc);
                     request.setAttribute("messageType", "info");
                     request.setAttribute("message", "Veículo adicionado com sucesso!");
