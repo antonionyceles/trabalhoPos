@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pos.dao;
 
 import com.pos.entity.Usuario;
@@ -151,7 +146,7 @@ public class UsuarioDAO extends DaoGenerico {
             this.conexao.setAutoCommit(false);
             PreparedStatement stmt;
             ResultSet rs;
-            String sqlCliente = "INSERT INTO DBCUSTOAUTO.CLIENTE(DS_EMAIL,"
+            String sqlCliente = "INSERT INTO cliente(DS_EMAIL,"
                     + "NM_NOME, NM_SOBRENOME, NR_CELULAR,NR_TELEFONE)"
                     + " VALUES('" + user.getCliente().getDsEmail() + "','" + user.getCliente().getNmNome() + "','"
                     + user.getCliente().getNmSobrenome() + "','"
@@ -161,8 +156,8 @@ public class UsuarioDAO extends DaoGenerico {
             int cdCliente = stmt.executeUpdate(sqlCliente, Statement.RETURN_GENERATED_KEYS);
             
             user.setCdCliente(new BigInteger(String.valueOf(cdCliente)));
-            String sqlUsuario = "INSERT INTO DBCUSTOAUTO.USUARIO(CD_CLIENTE, DS_LOGIN, DS_PASSWORD, DT_CADASTRO, TP_STATUS)"
-                    + "VALUES(" + user.getCdCliente() + ",'" + user.getCliente().getDsEmail() + "','" + user.getDsPassword() + "','" + format.format(new Date()) + "','" + user.getTpStatus() + "');";
+            String sqlUsuario = "INSERT INTO usuario(CD_CLIENTE, DS_LOGIN, DS_PASSWORD, DT_CADASTRO)"
+                    + "VALUES(" + user.getCdCliente() + ",'" + user.getCliente().getDsEmail() + "','" + user.getDsPassword() + "','" + format.format(new Date()) + "');";
            
             stmt = this.conexao.prepareStatement(sqlUsuario);
             // executa um select

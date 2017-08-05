@@ -15,13 +15,13 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
 
-    protected String url = "jdbc:mysql://localhost/dbcustoauto";
+    protected String url = "jdbc:mysql://localhost/db_custoauto";
     protected String login = "root";
-    protected String senha = "";
+    protected String senha = "1234";
 
     public Connection getConnection() {
         try {
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver()); //Essa linha foi a diferença
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver()); 
             return DriverManager.getConnection(
                     url + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", login, senha);
         } catch (SQLException e) {
