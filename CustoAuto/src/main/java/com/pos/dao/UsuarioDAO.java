@@ -42,12 +42,12 @@ public class UsuarioDAO {
         
     }
     
-    public Object findById(BigInteger id) {
+    public Usuario findById(BigInteger id) {
         Usuario user = null;
         try {
             this.conexao = new ConnectionFactory().getConnection();
             // cria um preparedStatement
-            String sql = "select * from usuario where cd_usuario = ?";
+            String sql = "select * from usuario where id = ?";
             PreparedStatement stmt = this.conexao.prepareStatement(sql);
             stmt.setBigDecimal(0, new BigDecimal(id) );
             
