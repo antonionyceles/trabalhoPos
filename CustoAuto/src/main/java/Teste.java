@@ -1,5 +1,6 @@
 
 import com.pos.dao.UsuarioDAO;
+import com.pos.entity.TipoDespesa;
 import com.pos.entity.Usuario;
 import com.pos.factory.ConnectionFactory;
 import com.pos.session.SessionSingleton;
@@ -24,6 +25,8 @@ public class Teste {
        /* Usuario user = new Usuario("antonionyceles", "654987");
 //        SessionSingleton.setSessionUsuario(user);
         SessionSingleton.getAllKeys();*/
+       
+        System.out.println(TipoDespesa.valueOf("CO").nome());
     }
 
 }

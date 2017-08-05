@@ -35,7 +35,7 @@
 
         </div>
         <div class="col-sm-3">
-            <a href="form.jsp?operacao=1" class="btn btn-primary pull-right h2">Novo Item</a>
+            <a href="Movimento?operacao=1" class="btn btn-primary pull-right h2">Novo Item</a>
         </div>
     </div> <!-- /#top -->
 
@@ -53,7 +53,7 @@
                         <th>Data</th>
                         <th>Ação</th>
 
-                        <th class="actions">Ações</th>
+                     
                     </tr>
                 </thead>
                 <tbody>
@@ -61,8 +61,8 @@
                         <tr>
                             <td>${despesa.getId()}</td>
                             <td>${despesa.getValor()}</td>
-                            <td>${ despesa.getKm()}</td>
-                            <td>${despesa.getDataCadastro()}</td>
+                            <td>${ despesa.getKilometragem()}</td>
+                            <td>${despesa.getDataRegistro()}</td>
 
 
                             <td class="actions">

@@ -10,8 +10,8 @@ package com.pos.entity;
  * @author jony
  */
 public enum TipoDespesa {
-    Combustivel("CO", "Combustível"), Oficina("OF", "Oficina"), Pecas("CP", "Compra de peças"), 
-    Lavagem("LA", "Lavagem"), Impostos("IM", "Impostos"), Outros("99", "Outros");
+    CO("CO", "Combustível"), OF("OF", "Oficina"), CP("CP", "Compra de peças"), 
+    LA("LA", "Lavagem"), IM("IM", "Impostos"), OT("OT", "Outros");
     
     private final String codigo;
     private final String nome;

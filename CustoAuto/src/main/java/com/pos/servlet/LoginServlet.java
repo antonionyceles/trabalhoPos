@@ -41,7 +41,8 @@ public class LoginServlet extends HttpServlet {
                     request.getParameter("senha"));
             HttpSession session = request.getSession();
             try {
-                usuarioBo.isUser(user);
+                
+                user = usuarioBo.isUser(user);
                 session.setAttribute("usuario", user);
                 request.getRequestDispatcher("menu.jsp").forward(request, response);
             } catch (Exception ex) {
@@ -66,7 +67,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         if (request.getParameter("operacao").equals("2")) {
             request.setAttribute("messageType", "info");
-            request.setAttribute("message","Logout efetuado com sucesso!");
+            request.setAttribute("message", "Logout efetuado com sucesso!");
             request.getRequestDispatcher("index.jsp").forward(request, response);
             SessionSingleton.deleteSession((Usuario) request.getSession().getAttribute("usuario"));
             request.getSession().invalidate();

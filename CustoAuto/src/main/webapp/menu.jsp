@@ -29,7 +29,7 @@
   <div id="despesas" class="tab-pane fade">
    
  <br>  
-      <a href="movimento/list.jsp" class="btn btn-warning">Consultar Despesa</a> <br>  <br>  
+      <a href="Movimento?operacao=2" class="btn btn-warning">Consultar Despesa</a> <br>  <br>  
                         <a href="movimento/form.jsp?operacao=1" class="btn btn-warning">Cadastrar Despesa</a>
                    
   </div>

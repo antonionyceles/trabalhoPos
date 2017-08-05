@@ -12,9 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Seja bem vindo: <%=request.getParameter("nome")%></h1>
+
         <form class="form" method="post" action="abastecer.jsp">
-            <input type="hidden" name="nome" value='<%=request.getParameter("nome")%>'/>
+
             Veículo 
             <select name="tipo" >
                 <option value="carro" label="Carro"/>
@@ -27,7 +27,7 @@
                 <li>Estrada KM<input type="number" name="estrada"/></li>
             </ul>
             <input type="submit" value="Abastecer" />
-            
+
 
         </form>
     </body>
