@@ -26,6 +26,6 @@ public enum TipoVeiculo {
     
     public String nome() {
         return this.nome;
-    }  
+    }   
     
 }

@@ -14,13 +14,20 @@
             <div class="form-group col-md-6">
                 <label for="tipo">Veículo</label> 
                 <select name="tipo" class="form-control">
-                    <option value="carro" label="Carro"/>
-                    <option value="moto" label="Moto"/>
+                    <option value="1" label="Carro"/>
+                    <option value="2" label="Pickup"/>                    
+                    <option value="3" label="Moto"/>
+                    <option value="4" label="Caminhão"/>
+                    <option value="5" label="Outros"/>
                 </select>
             </div>
             <div class="form-group col-md-6">
-                <label for="modelo">Modelo</label>
-                <input type="text" name="modelo" class="form-control"/>
+                <label for="descricao">Descrição</label>
+                <input type="text" name="descricao" class="form-control"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="placa">Placa</label>
+                <input type="text" name="placa" class="form-control"/>
             </div>
 
             <div class="row pull-right">

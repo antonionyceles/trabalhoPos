@@ -48,8 +48,8 @@ public class VeiculoUsuario {
         this.usuario = usuario;
     }
 
-    public TipoVeiculo getTipo() {
-        return tipo;
+    public String getTipo() {
+        return this.tipo.codigo();
     }
 
     public void setTipo(TipoVeiculo tipo) {
