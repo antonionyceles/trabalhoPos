@@ -23,16 +23,17 @@ public class UsuarioDAO {
             this.conexao.setAutoCommit(false);
             PreparedStatement stmt;
             ResultSet rs;
-            String sqlUsuario = "INSERT INTO usuario(`nome`, `email`, `senha`)"
-                    + "VALUES(?, ?, ?);";
+            System.out.println("Aqui");
+            String sqlUsuario = "INSERT INTO usuario (nome, email, senha) VALUES ( ? , ? , ? )";
             stmt = this.conexao.prepareStatement(sqlUsuario);
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
 
-            // executa um select
-            stmt.executeUpdate(sqlUsuario);
+            // executa um select            
+            stmt.executeUpdate();
             this.conexao.commit();
+            
         } catch (Exception ex) {
             this.conexao.rollback();
             throw ex;
@@ -49,7 +50,7 @@ public class UsuarioDAO {
             // cria um preparedStatement
             String sql = "select * from usuario where id = ?";
             PreparedStatement stmt = this.conexao.prepareStatement(sql);
-            stmt.setBigDecimal(0, new BigDecimal(id));
+            stmt.setBigDecimal(1, new BigDecimal(id));
 
             // executa um select
             ResultSet rs = stmt.executeQuery();

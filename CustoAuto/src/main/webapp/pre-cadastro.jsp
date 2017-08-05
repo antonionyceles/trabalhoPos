@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@ page import="com.pos.entity.Cliente" %>
 <%@ page import="com.pos.entity.Usuario" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
@@ -204,75 +203,25 @@ span.input-group-addon i {
     	<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-				<h3>Cadastro de usuário</h3>
-					<form class="" method="post" action="#">
+				<h3>Cadastro de usuário</h3>					
+                                            <form method="post"  id="preCadastro"  action="PreCadastroServlet">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Nome</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <input type="text" name="nome" class="form-control" value="${cliente.nmNome}" required="true" placeholder="Digite o seu nome"/> 
+                <input type="text" name="nome" class="form-control" value="${usuario.nome}" required="true" placeholder="Digite o seu nome"/> 
 							</div>
 						</div>
                                                 </div>   
-                                                        
-<!--                                                <div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Sobrenome</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                <input type="text" name="sobrenome" class="form-control" value="${cliente.nmSobrenome}" required="true" placeholder="Digite o sobrenome"/> 								</div>
-							</div>
-						</div>        -->
-                                                        
-<!--                                                        
-                                                           <div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Telefone</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
-                <input type="text"  name="telefone" class="tel form-control" value="${cliente.nrTelefone}"  required="true" placeholder="Digite o um número de telefone fixo"/> 
-							</div>
-						</div>        
-                                                           </div>-->
-                                                        
-                                                        
-                                                        
-<!--                                                        
-                                                                       
-                                                           <div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Telefone</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-mobile fa" aria-hidden="true"></i></span>
-                                                                        <input type="text" name="celular" class="tel form-control" value="${cliente.nrCelular}" required="true" placeholder="Digite o número do seu celular"/> 
-							</div>
-						</div>        
-                                                           </div>
-                                                        
-                                                        
-                                                                        <div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Data de nascimento</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-calendar fa" aria-hidden="true"></i></span>
-                                                                        <input type="text" name="dtNascimento" class="form-control" value="" required="true" placeholder="dd/mm/aaaa"/> 
-							</div>
-						</div>        
-                                                           </div>-->
-
-                                                        
-                                                        
-
-
 
 						<div class="form-group">
 							<label for="email" class="cols-sm-2 control-label">Email</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                <input type="email" name="email" class="form-control" value="${cliente.dsEmail}" placeholder="Digite o seu email" alt="" required="true"/> 
+                <input type="email" name="email" class="form-control" value="${usuario.email}" placeholder="Digite o seu email" alt="" required="true"/> 
 								</div>
 							</div>
 						</div>
