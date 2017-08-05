@@ -6,6 +6,7 @@ package com.pos.servlet;
  */
 import com.pos.bo.DespesasBO;
 import com.pos.bo.VeiculoBO;
+import com.pos.dao.UsuarioDAO;
 import com.pos.entity.DespesaVeiculo;
 import com.pos.entity.TipoDespesa;
 import com.pos.entity.TipoVeiculo;
@@ -95,7 +96,8 @@ public class MovimentoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+            // Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+            Usuario usuario = new UsuarioDAO().findById(BigInteger.valueOf(4));
             switch (request.getParameter("operacao")) {
                 case "2":
                     DespesasBO despesaBO = new DespesasBO();

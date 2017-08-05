@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="java.math.BigInteger"%>
+<%@page import="com.pos.bo.VeiculoBO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
@@ -22,22 +24,12 @@
             <h2>Veiculos Cadastrados</h2>
         </div>
         <div class="col-sm-6">
-
-<!--            <div class="input-group h2">
-                <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>-->
-
         </div>
         <div class="col-sm-3">
             <a href="form.jsp?operacao=1" class="btn btn-primary pull-right h2">Novo Item</a>
         </div>
     </div> <!-- /#top -->
-
+    
 
     <hr />
     <div id="list" class="row">
@@ -59,14 +51,14 @@
                     <%  
                         List<VeiculoUsuario> lista = (List<VeiculoUsuario>)request.getAttribute("listaVeiculos");                        
                         if (lista == null ){
-                            lista = new ArrayList<VeiculoUsuario>();
+                            lista = new VeiculoBO().findByUser( BigInteger.valueOf(4) );
                         }
                         
                     %>                    
                         <% for (VeiculoUsuario vc : lista) { %>
                             </tr>
                                 <td><%= vc.getId()%></td>
-                                <td><%= vc.getTipo() %></td>
+                                <td><%= vc.getNomeTipo() %></td>
                                 <td><%= vc.getDescricao()%></td>
                                 <td><%= vc.getPlaca()%></td>
                                 
@@ -86,17 +78,7 @@
 
     </div> <!-- /#list -->
 
-    <div id="bottom" class="row">
-        <div class="col-md-12">
-            <ul class="pagination">
-                <li class="disabled"><a>&lt; Anterior</a></li>
-                <li class="disabled"><a>1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-            </ul><!-- /.pagination -->
-        </div>
-    </div> <!-- /#bottom -->
+    
 </div> <!-- /#main -->
 
 <!-- Modal -->

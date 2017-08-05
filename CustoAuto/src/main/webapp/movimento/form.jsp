@@ -12,11 +12,12 @@
                 <div class="form-group col-md-6">
                     <label for="categoria"> Categoria de Gasto</label>
                     <select name="categoria" class="form-control">
-                        <option value="CP" label="IPVA">Peças</option>
+                        <option value="CP" label="Pecas">Compra de Peças</option>
                         <option value="CO" label="Combustível"/>Combustível</option>
-                        <option value="OF" label="Mecânico"/>Mecânico</option>
+                        <option value="OF" label="Oficina"/>Oficina</option>
                         <option value="LA" label="Lavagem"/>Lavagem</option>
                         <option value="IM" label="Imposto"/>Imposto</option>
+                        <option value="OT" label="Outros"/>Outros</option>
 
                     </select>
                 </div>

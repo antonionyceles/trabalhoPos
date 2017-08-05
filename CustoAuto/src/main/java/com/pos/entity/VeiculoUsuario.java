@@ -55,6 +55,10 @@ public class VeiculoUsuario {
     public String getTipo() {
         return this.tipo.codigo();
     }
+    
+    public String getNomeTipo() {
+        return this.tipo.nome();
+    }
 
     public void setTipo(TipoVeiculo tipo) {
         this.tipo = tipo;
