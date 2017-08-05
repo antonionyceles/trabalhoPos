@@ -74,7 +74,7 @@ public class UsuarioDAO {
         try {
             this.conexao = new ConnectionFactory().getConnection();
             // cria um preparedStatement
-            String sql = "select * from usuario where email = ? AND password = ?;";
+            String sql = "select * from usuario where email=? AND senha=?;";
             PreparedStatement stmt = this.conexao.prepareStatement(sql);
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getSenha());

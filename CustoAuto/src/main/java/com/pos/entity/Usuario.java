@@ -39,16 +39,6 @@ public class Usuario {
         this.dataAtualizacao = dataAtualizacao;
     }
     
-    /*
-    public Boolean isUser(Usuario login) {
-        Boolean result = false;
-        if (login.getDsLogin().equalsIgnoreCase("admin") && login.getDsPassword().equals("admin")) {
-            result = true;
-        }
-        return result;
-    }
-    */
-
     public BigInteger getId() {
         return id;
     }
