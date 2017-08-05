@@ -24,18 +24,22 @@ public class UsuarioBO {
 
     public Usuario isUser(Usuario user) throws Exception {
         userDAO = new UsuarioDAO();
+        System.out.println("*************************");
+        System.out.println(user.toString());
         if (user.getSenha().equals("") || user.getEmail().equals("")) {
             throw new Exception("Usuário ou Senha inválido");
         }
         user.setSenha(getSenhaCriptografada(user.getSenha()));
+        System.out.println("Aqui");
+        System.out.println(getSenhaCriptografada(user.getSenha()));
         Usuario usuario = userDAO.findOneByUsuarioSenha(user);
         if (usuario == null) {
             throw new Exception("Usuário inválido");
         }
-        if(SessionSingleton.getSession(user)){
-            throw new Exception("Usuário já está conectado em outro dispositivo");
-        }
-        SessionSingleton.setSessionUsuario(user);
+//        if(SessionSingleton.getSession(user)){
+//            throw new Exception("Usuário já está conectado em outro dispositivo");
+//        }
+//        SessionSingleton.setSessionUsuario(user);
         return usuario;
     }
 

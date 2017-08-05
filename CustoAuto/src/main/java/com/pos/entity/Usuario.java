@@ -25,6 +25,11 @@ public class Usuario {
         
     }
 
+    public Usuario(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
+    }   
+    
     public Usuario(BigInteger id, String nome, String email, String senha, Date dataRegistro, Date dataAtualizacao) {
         this.id = id;
         this.nome = nome;
@@ -34,16 +39,6 @@ public class Usuario {
         this.dataAtualizacao = dataAtualizacao;
     }
     
-    /*
-    public Boolean isUser(Usuario login) {
-        Boolean result = false;
-        if (login.getDsLogin().equalsIgnoreCase("admin") && login.getDsPassword().equals("admin")) {
-            result = true;
-        }
-        return result;
-    }
-    */
-
     public BigInteger getId() {
         return id;
     }
@@ -69,7 +64,7 @@ public class Usuario {
     }
 
     public String getSenha() {
-        return senha;
+        return this.senha;
     }
 
     public void setSenha(String senha) {

@@ -24,7 +24,7 @@ public class SessionSingleton {
         Boolean result = false;
         ConexaoRedis con = new ConexaoRedis();
         Jedis jedis = con.conectar();
-        if (jedis.exists("session:custoauto:" + user.getDsLogin())) {
+        if (jedis.exists("session:custoauto:" + user.getEmail())) {
             result = true;
         }
         jedis.disconnect();
@@ -37,16 +37,16 @@ public class SessionSingleton {
         Jedis jedis = con.conectar();
         Map<String, String> usuario = new HashMap<>();
         Timestamp t = new Timestamp(new Date().getTime());
-        usuario.put("login", user.getDsLogin());
+        usuario.put("login", user.getEmail());
         usuario.put("timestamp", String.valueOf(t.getTime()));
-        jedis.hmset("session:custoauto:" + user.getDsLogin(), usuario);
+        jedis.hmset("session:custoauto:" + user.getEmail(), usuario);
         jedis.disconnect();
     }
 
     public static void deleteSession(Usuario user) {
         ConexaoRedis con = new ConexaoRedis();
         Jedis jedis = con.conectar();
-        System.out.println(jedis.del("session:custoauto:" + user.getDsLogin()));
+        System.out.println(jedis.del("session:custoauto:" + user.getEmail()));
         jedis.disconnect();
     }
 
