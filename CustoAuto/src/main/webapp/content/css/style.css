@@ -6,6 +6,8 @@ body {
     
 }
 
+
+
 .panel-default{
   
     padding: 15px;
@@ -14,6 +16,10 @@ body {
 .navbar{
     padding: 0 15px;
     background: #3498DB;
+}
+
+.navbar-default .navbar-brand{
+    color: #fff;
 }
 
 .navbar-default .navbar-nav>li>a {
