@@ -7,12 +7,9 @@ package com.pos.bo;
 
 import com.pos.dao.UsuarioDAO;
 import com.pos.entity.Usuario;
-import com.pos.session.SessionSingleton;
-import com.pos.util.StringUtil;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 
 /**
  *

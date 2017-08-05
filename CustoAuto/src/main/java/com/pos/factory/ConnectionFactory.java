@@ -17,7 +17,7 @@ public class ConnectionFactory {
 
     protected String url = "jdbc:mysql://localhost/dbcustoauto";
     protected String login = "root";
-    protected String senha = "";
+    protected String senha = "1234";
 
     public Connection getConnection() {
         try {
