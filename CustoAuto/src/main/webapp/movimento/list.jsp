@@ -6,10 +6,10 @@
 
 
 <%@page import="java.math.BigDecimal"%>
-<%@page import="com.pos.entity.Movimentacao"%>
+
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="com.pos.entity.Veiculo"%>
+
 <%@page import="java.util.List"%>
 
 <%@ include file = "../header.jsp" %>
@@ -56,33 +56,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%                        if (request.getSession().getAttribute("movimentacaoList") != null) {
+                    <c:forEach items="${despesaVeiculoL}" var="despesa">
+                        <tr>
+                            <td>${despesa.getId()}</td>
+                            <td>${despesa.getValor()}</td>
+                            <td>${ despesa.getKm()}</td>
+                            <td>${despesa.getDataCadastro()}</td>
 
-                            Map<String, Movimentacao> mp = (Map<String, Movimentacao>) request.getSession().getAttribute("movimentacaoList");
 
-                            Iterator it = mp.entrySet().iterator();
-                            while (it.hasNext()) {
-                                Map.Entry pair = (Map.Entry) it.next();
-                                Movimentacao vc
-                                        = (Movimentacao) pair.getValue();
-                                total.add(vc.getValor());
-                    %>
-                    <tr>
-                        <td><%= vc.getId()%></td>
-                        <td><%= vc.getVeiculo().getModelo()%></td>
-                        <td><%= vc.getKm()%></td>
-                        <td><%= vc.getData()%></td>
-                        <td><%= vc.getValor()%></td>
-
-                        <td class="actions">
-                            <!--<a class="btn btn-success btn-xs" href="view.html">Visualizar</a>-->
-                            <a class="btn btn-warning btn-xs" href="edit.jsp?operacao=2&id=<%=vc.getId()%>">Editar</a>
-                            <a class="btn btn-danger btn-xs"  href="../MovimentoServlet?operacao=3&id=<%=vc.getId()%>" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                        </td>
-                    </tr>
-                    <%}
-                        }%>
-                    < / tbody >
+                            <td class="actions">
+                                <!--<a class="btn btn-success btn-xs" href="view.html">Visualizar</a>-->
+                                <a class="btn btn-warning btn-xs" href="edit.jsp?operacao=2&id=${despesa.getId()}">Editar</a>
+                                <a class="btn btn-danger btn-xs"  href="../MovimentoServlet?operacao=3&id=${despesa.getId()}" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody >
 
             </table>
             <div class="row">Total: <%=total%></div>
